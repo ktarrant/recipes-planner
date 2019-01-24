@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# PyCharm Workspace Files
+# Note that we like to keep some of them
+.idea/workspace.xml
