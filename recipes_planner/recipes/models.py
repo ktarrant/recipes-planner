@@ -21,7 +21,8 @@ class Ingredient(Orderable):
     it searchable.
     """
     recipe = models.ForeignKey("Recipe", verbose_name="Recipe", related_name="ingredients")
-    quantity = models.CharField("Quantity", max_length=10, blank=True, null=True)
+    quantity = models.FloatField("Quantity", null=True)
     unit = models.IntegerField("Unit", choices=UNITS, blank=True, null=True)
     ingredient_name = models.CharField("Ingredient Name", max_length=100)
+    ingredient_recipe = models.OneToOneField(Recipe, on_delete=models.CASCADE, blank=True, null=True)
     note = models.CharField("Note", max_length=200, blank=True, null=True)

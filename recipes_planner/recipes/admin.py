@@ -6,6 +6,7 @@ from .models import *
 # Register your models here.
 class IngredientAdminInline(admin.TabularInline):
     model = Ingredient
+    fk_name = 'recipe'
 
 class RecipeAdmin(PageAdmin):
     inlines = (IngredientAdminInline, )
