@@ -1,0 +1,31 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags %}
+
+{% block main %}{{ block.super }}
+<h2>Overview</h2>
+<table>
+    <tr>
+        <td>Yields</td>
+        <td>{{ page.recipe.portions }} servings</td>
+    </tr>
+    <tr>
+        <td>Difficulty</td>
+        <td>{{ page.recipe.difficulty }}</td>
+    </tr>
+    {% if page.recipe.source %}
+    <tr>
+        <td>Source</td>
+        <td><a href="{{ page.recipe.source }}">Link</a></td>
+    </tr>
+    {% endif %}
+</table>
+
+<h2>Ingredients</h2>
+
+<h2>Instructions</h2>
+{% editable page.recipe.instructions %}
+{{ page.recipe.instructions|richtext_filters }}
+{% endeditable %}
+
+{% endblock %}
