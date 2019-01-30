@@ -3,46 +3,30 @@
 {% load mezzanine_tags %}
 
 {% block main %}{{ block.super }}
-<h2>Overview</h2>
-<table>
-    <tr>
-        <td>Yields</td>
-        <td>{{ page.recipe.portions }} servings</td>
-    </tr>
-    <tr>
-        <td>Difficulty</td>
-        <td>{{ page.recipe.difficulty }}</td>
-    </tr>
+
+<div>
+    <span class="badge">Yields {{ page.recipe.portions }} servings</span>
+    <span class="badge">{{ page.recipe.difficulty }}</span>
     {% if page.recipe.source %}
-    <tr>
-        <td>Source</td>
-        <td><a href="{{ page.recipe.source }}">Link</a></td>
-    </tr>
+    <button type="button" class="btn btn-link">Source Link</button>
     {% endif %}
-</table>
+</div>
 
-<h2>Ingredients</h2>
+<div>
+    <ul class="list-group">
+        {% for ingredient in page.recipe.get_ingredients %}
+        <li class="list-group-item">
+            {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient_name }}
+            {% if ingredient.note %}<i>({{ ingredient.note }})</i>{% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 
-<table>
-    <thead>
-        <th>Quantity</th>
-        <th>Ingredient</th>
-        <th>Units</th>
-        <th>Note</th>
-    </thead>
-    {% for ingredient in page.recipe.get_ingredients %}
-    <tr>
-        <td>{{ ingredient.quantity }}</td>
-        <td>{{ ingredient.ingredient_name }}</td>
-        <td>{{ ingredient.unit }}</td>
-        <td>{% if ingredient.note %}<i>{{ ingredient.note }}{% endif %}</i></td>
-    </tr>
-    {% endfor %}
-</table>
-
-<h2>Instructions</h2>
+<div>
 {% editable page.recipe.instructions %}
 {{ page.recipe.instructions|richtext_filters }}
 {% endeditable %}
+</div>
 
 {% endblock %}
