@@ -23,6 +23,23 @@
 
 <h2>Ingredients</h2>
 
+<table>
+    <thead>
+        <th>Quantity</th>
+        <th>Ingredient</th>
+        <th>Units</th>
+        <th>Note</th>
+    </thead>
+    {% for ingredient in page.recipe.get_ingredients %}
+    <tr>
+        <td>{{ ingredient.quantity }}</td>
+        <td>{{ ingredient.ingredient_name }}</td>
+        <td>{{ ingredient.unit }}</td>
+        <td>{% if ingredient.note %}<i>{{ ingredient.note }}{% endif %}</i></td>
+    </tr>
+    {% endfor %}
+</table>
+
 <h2>Instructions</h2>
 {% editable page.recipe.instructions %}
 {{ page.recipe.instructions|richtext_filters }}
