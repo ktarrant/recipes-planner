@@ -4,7 +4,7 @@
 
 {% block main %}{{ block.super }}
 
-<div>
+<div class="row">
     <span class="badge">Yields {{ page.recipe.portions }} servings</span>
     <span class="badge">{{ page.recipe.difficulty }}</span>
     {% if page.recipe.source %}
@@ -12,7 +12,7 @@
     {% endif %}
 </div>
 
-<div>
+<div class="row">
     <ul class="list-group">
         {% for ingredient in page.recipe.get_ingredients %}
         <li class="list-group-item">
@@ -23,10 +23,10 @@
     </ul>
 </div>
 
-<div>
-{% editable page.recipe.instructions %}
-{{ page.recipe.instructions|richtext_filters }}
-{% endeditable %}
+<div class="row">
+    {% editable page.recipe.instructions %}
+    {{ page.recipe.instructions|richtext_filters }}
+    {% endeditable %}
 </div>
 
 {% endblock %}
