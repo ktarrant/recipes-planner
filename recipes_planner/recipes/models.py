@@ -11,14 +11,29 @@ DIFFICULTY_CHOICES = [(v, v) for v in DIFFICULTIES]
 # Unit names ised from:
 # https://github.com/hgrecco/pint/blob/master/pint/default_en.txt
 GENERIC_UNIT_NAMES = [
-    "whole",       # a whole "something"
-    "taste",       # add ingredient as needed
+    "whole",        # a whole "something"
+    "taste",        # add ingredient as needed
+]
+
+WEIGHT_UNIT_NAMES = [
+    # -- Mass
+    "gram",  # [mass] = g
+
+    # -- Avoirdupois
+    # "grain",        # avdp_pound / 7000 = gr
+    # "drachm",       # pound / 256 = dr = avoirdupois_dram = avdp_dram = dram
+    "ounce",        # pound / 16 = oz = avoirdupois_ounce = avdp_ounce
+    "pound",        # 453.59237 gram = lb = avoirdupois_pound = avdp_pound
+    # "short_hunderdweight",  # 100 avoirdupois_pound = ch_cwt
+    # "long_hunderweight",    # 112 avoirdupois_pound = lg_cwt
+    # "short_ton",            # 2000 avoirdupois_pound
+    # "long_ton",             # 2240 avoirdupois_pound
 ]
 
 VOLUME_UNIT_NAMES = [
     # -- Volume
-    "liter",       # 1e-3 * m ** 3 = l = L = litre
-    "cc",          # centimeter ** 3 = cubic_centimeter
+    "liter",        # 1e-3 * m ** 3 = l = L = litre
+    "cc",           # centimeter ** 3 = cubic_centimeter
 
     # -- USCSDryVolume
     "dry_pint",    # 33.6003125 cubic_inch  = dpi = US_dry_pint
@@ -49,7 +64,7 @@ VOLUME_UNIT_NAMES = [
 ]
 
 # Combine all the unit names here
-UNIT_NAMES = GENERIC_UNIT_NAMES + VOLUME_UNIT_NAMES
+UNIT_NAMES = GENERIC_UNIT_NAMES + WEIGHT_UNIT_NAMES + VOLUME_UNIT_NAMES
 UNIT_LABELS = [n.replace("_", " ") for n in UNIT_NAMES]
 UNIT_CHOICES = list(zip(UNIT_NAMES, UNIT_LABELS))
 
