@@ -11,7 +11,8 @@ DIFFICULTY_CHOICES = [(v, v) for v in DIFFICULTIES]
 # Unit names ised from:
 # https://github.com/hgrecco/pint/blob/master/pint/default_en.txt
 GENERIC_UNIT_NAMES = [
-    "whole",        # a whole "something"
+    "whole",        # a whole "something", could be a recipe
+    "serving",      # a serving as indicated by the recipe or label
     "taste",        # add ingredient as needed
 ]
 
@@ -87,7 +88,7 @@ class Ingredient(Orderable):
     """
     recipe = models.ForeignKey("Recipe", verbose_name="Recipe", related_name="ingredients")
     quantity = models.FloatField("Quantity", null=True)
-    unit = models.CharField("Unit", max_length=16, choices=UNIT_CHOICES, blank=True, null=True)
+    unit = models.CharField("Unit", max_length=16, choices=UNIT_CHOICES)
     ingredient_name = models.CharField("Ingredient Name", max_length=100)
     ingredient_recipe = models.OneToOneField(Recipe, on_delete=models.CASCADE, blank=True, null=True)
     note = models.CharField("Note", max_length=200, blank=True, null=True)

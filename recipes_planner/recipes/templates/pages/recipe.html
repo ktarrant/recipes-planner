@@ -16,17 +16,68 @@
     <ul class="list-group">
         {% for ingredient in page.recipe.get_ingredients %}
         <li class="list-group-item">
-            {{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.ingredient_name }}
-            {% if ingredient.note %}<i>({{ ingredient.note }})</i>{% endif %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {% if ingredient.quantity %}{{ ingredient.quantity }}{% endif %}
+                        {{ ingredient.unit }}
+                        {{ ingredient.ingredient_name }}
+                    </h5>
+                    {% if ingredient.note %}
+                    <h6 class="card-subtitle mb-2 text-muted">{{ ingredient.note }}</h6>
+                    {% endif %}
+
+                    {% if ingredient.ingredient_recipe %}
+                    <ul class="list-group">
+                        {% for rec_ingredient in ingredient.ingredient_recipe.get_ingredients %}
+                        <li class="list-group-item">
+                            {% if rec_ingredient.quantity %}{{ rec_ingredient.quantity }}{% endif %}
+                            {{ rec_ingredient.unit }}
+                            {{ rec_ingredient.ingredient_name }}
+                            {% if rec_ingredient.note %}
+                            <i>({{ rec_ingredient.note }})</i>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
         </li>
         {% endfor %}
     </ul>
 </div>
 
 <div class="row">
-    {% editable page.recipe.instructions %}
-    {{ page.recipe.instructions|richtext_filters }}
-    {% endeditable %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Instructions</h3>
+            <p class="card-text">
+                {% editable page.recipe.instructions %}
+                {{ page.recipe.instructions|richtext_filters }}
+                {% endeditable %}
+            </p>
+        </div>
+    </div>
+
+    {% for ingredient in page.recipe.get_ingredients %}
+
+    {% if ingredient.ingredient_recipe %}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ ingredient.ingredient_recipe.title }}</h4>
+            <p class="card-text">
+                {% editable ingredient.ingredient_recipe.instructions %}
+                {{ ingredient.ingredient_recipe.instructions|richtext_filters }}
+                {% endeditable %}
+            </p>
+        </div>
+    </div>
+
+    {% endif %}
+
+    {% endfor %}
+
 </div>
 
 {% endblock %}
