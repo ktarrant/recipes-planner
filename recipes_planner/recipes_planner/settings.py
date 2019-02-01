@@ -135,6 +135,9 @@ AUTHENTICATION_BACKENDS = ("mezzanine.core.auth_backends.MezzanineBackend",)
 # a mode you'd pass directly to os.chmod.
 FILE_UPLOAD_PERMISSIONS = 0o644
 
+SITE_TITLE = "Buddha Recipes"
+
+SITE_TAGLINE = "Healthy and Efficient Meal Planning"
 
 #############
 # DATABASES #
